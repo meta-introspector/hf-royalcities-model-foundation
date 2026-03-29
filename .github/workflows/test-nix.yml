@@ -1,0 +1,41 @@
+name: Test Nix Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-nix:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: meta-introspector/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install Nix
+      uses: meta-introspector/install-nix-action@v26
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+
+    - name: Flake Check
+      run: nix flake check --impure --no-build
+
+    - name: Build stable-audio-tools
+      run: nix build --impure 2>&1 | tail -5
+
+    - name: Test Import
+      run: |
+        nix develop --impure --command python3 -c "
+        from stable_audio_tools.models.factory import create_model_from_config
+        from stable_audio_tools.inference.generation import generate_diffusion_cond
+        print('stable-audio-tools OK')
+        "
+
+    - name: Test generate.py --help
+      run: nix develop --impure --command python3 generate.py --help
