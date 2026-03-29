@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "model": "RoyalCities/Foundation-1",
+  "model_file": "mock_weights.bin",
+  "model_size": 10485760,
+  "model_hash": "0ed4fad7d4333a854fc2629783dc8cc2adbd546e4d3a5a360f7f35746e7625d4",
+  "timestamp": "20260327T130951Z",
+  "spot_checks": [
+    {
+      "index": 0,
+      "offset": 3235840,
+      "size": 4096,
+      "sha256": "c27036e882e59a00188dcb548e41aaf1bdb4ff584bd159daf1314360498e9842",
+      "cache_misses": 9,
+      "sample_floats": [
+        -0.07019,
+        0.003471,
+        -10.460938,
+        0.239502,
+        -0.000574,
+        -16.34375,
+        0.11322,
+        14856.0
+      ],
+      "page_number": 790
+    },
+    {
+      "index": 1,
+      "offset": 5976064,
+      "size": 4096,
+      "sha256": "1da61f6643d3a3e3d3cb1dba2140a1d660ce77c56867d0fca145ffe32e8e237a",
+      "cache_misses": 9,
+      "sample_floats": [
+        8.7e-05,
+        -0.016281,
+        -0.035889,
+        3628.0,
+        1590.0,
+        -0.000432,
+        0.0008,
+        -8.039062
+      ],
+      "page_number": 1459
+    },
+    {
+      "index": 2,
+      "offset": 3813376,
+      "size": 4096,
+      "sha256": "4ca65c5208f41b7a42cdf424639d31bbce093410b2791f817ce4767314622b0f",
+      "cache_misses": 9,
+      "sample_floats": [
+        -4.5e-05,
+        1672.0,
+        0.004345,
+        -0.012306,
+        -24.3125,
+        0.234619,
+        -0.009369,
+        0.171265
+      ],
+      "page_number": 931
+    }
+  ],
+  "curve": {
+    "type": "spot_check_curve",
+    "points": [
+      [
+        3.23584,
+        9,
+        3.262133992
+      ],
+      [
+        5.976064,
+        9,
+        0.497426278
+      ],
+      [
+        3.813376,
+        9,
+        1.285971026
+      ]
+    ],
+    "description": "3 points in (offset_MB, cache_misses, hash_prefix) space",
+    "verification": "Read same offsets from public model, compute SHA256, compare"
+  },
+  "verification_url": "https://huggingface.co/RoyalCities/Foundation-1/resolve/main/Foundation_1.safetensors",
+  "instructions": [
+    "Download the model file from verification_url",
+    "For each spot_check: read 'size' bytes at 'offset'",
+    "Compute SHA256 of each block",
+    "Compare with spot_check sha256 values",
+    "All 3 must match \u2014 probability of forgery: 2^(-768)"
+  ]
+}

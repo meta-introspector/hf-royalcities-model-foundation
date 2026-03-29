@@ -1,0 +1,30 @@
+[submodule "stable-audio-tools"]
+	path = stable-audio-tools
+	url = https://github.com/Stability-AI/stable-audio-tools.git
+[submodule "deps/alias-free-torch"]
+	path = deps/alias-free-torch
+	url = https://github.com/junjun3518/alias-free-torch.git
+[submodule "deps/auraloss"]
+	path = deps/auraloss
+	url = https://github.com/csteinmetz1/auraloss.git
+[submodule "deps/descript-audio-codec"]
+	path = deps/descript-audio-codec
+	url = https://github.com/descriptinc/descript-audio-codec.git
+[submodule "deps/einops-exts"]
+	path = deps/einops-exts
+	url = https://github.com/lucidrains/einops-exts.git
+[submodule "deps/ema-pytorch"]
+	path = deps/ema-pytorch
+	url = https://github.com/lucidrains/ema-pytorch.git
+[submodule "deps/CLAP"]
+	path = deps/CLAP
+	url = https://github.com/LAION-AI/CLAP.git
+[submodule "deps/v-diffusion-pytorch"]
+	path = deps/v-diffusion-pytorch
+	url = https://github.com/crowsonkb/v-diffusion-pytorch.git
+[submodule "deps/vector-quantize-pytorch"]
+	path = deps/vector-quantize-pytorch
+	url = https://github.com/lucidrains/vector-quantize-pytorch.git
+[submodule "deps/prefigure"]
+	path = deps/prefigure
+	url = https://github.com/drscotthawley/prefigure.git

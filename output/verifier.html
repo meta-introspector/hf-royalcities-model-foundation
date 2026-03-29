@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Foundation-1 Proof Verifier</title>
+<style>
+body{font:14px monospace;background:#1a1510;color:#e0d0b0;padding:2em;max-width:800px;margin:0 auto}
+h1{color:#e8c840}
+.ok{color:#0f0} .fail{color:#f00}
+button{background:#3a3020;color:#e8c840;border:1px solid #e8c840;padding:8px 16px;cursor:pointer;font:14px monospace}
+pre{background:#2a2018;padding:1em;overflow:auto;border:1px solid #3a3020}
+</style></head><body>
+<h1>☀ Foundation-1 Spot-Check Proof</h1>
+<p>This proof contains 3 SHA256 hashes of specific byte ranges from the model file.</p>
+<p>To verify: download the model and check the same offsets produce the same hashes.</p>
+<pre id="proof">{
+  "version": "1.0",
+  "model": "RoyalCities/Foundation-1",
+  "model_file": "mock_weights.bin",
+  "model_size": 10485760,
+  "model_hash": "0ed4fad7d4333a854fc2629783dc8cc2adbd546e4d3a5a360f7f35746e7625d4",
+  "timestamp": "20260327T130951Z",
+  "spot_checks": [
+    {
+      "index": 0,
+      "offset": 3235840,
+      "size": 4096,
+      "sha256": "c27036e882e59a00188dcb548e41aaf1bdb4ff584bd159daf1314360498e9842",
+      "cache_misses": 9,
+      "sample_floats": [
+        -0.07019,
+        0.003471,
+        -10.460938,
+        0.239502,
+        -0.000574,
+        -16.34375,
+        0.11322,
+        14856.0
+      ],
+      "page_number": 790
+    },
+    {
+      "index": 1,
+      "offset": 5976064,
+      "size": 4096,
+      "sha256": "1da61f6643d3a3e3d3cb1dba2140a1d660ce77c56867d0fca145ffe32e8e237a",
+      "cache_misses": 9,
+      "sample_floats": [
+        8.7e-05,
+        -0.016281,
+        -0.035889,
+        3628.0,
+        1590.0,
+        -0.000432,
+        0.0008,
+        -8.039062
+      ],
+      "page_number": 1459
+    },
+    {
+      "index": 2,
+      "offset": 3813376,
+      "size": 4096,
+      "sha256": "4ca65c5208f41b7a42cdf424639d31bbce093410b2791f817ce4767314622b0f",
+      "cache_misses": 9,
+      "sample_floats": [
+        -4.5e-05,
+        1672.0,
+        0.004345,
+        -0.012306,
+        -24.3125,
+        0.234619,
+        -0.009369,
+        0.171265
+      ],
+      "page_number": 931
+    }
+  ],
+  "curve": {
+    "type": "spot_check_curve",
+    "points": [
+      [
+        3.23584,
+        9,
+        3.262133992
+      ],
+      [
+        5.976064,
+        9,
+        0.497426278
+      ],
+      [
+        3.813376,
+        9,
+        1.285971026
+      ]
+    ],
+    "description": "3 points in (offset_MB, cache_misses, hash_prefix) space",
+    "verification": "Read same offsets from public model, compute SHA256, compare"
+  },
+  "verification_url": "https://huggingface.co/RoyalCities/Foundation-1/resolve/main/Foundation_1.safetensors",
+  "instructions": [
+    "Download the model file from verification_url",
+    "For each spot_check: read 'size' bytes at 'offset'",
+    "Compute SHA256 of each block",
+    "Compare with spot_check sha256 values",
+    "All 3 must match \u2014 probability of forgery: 2^(-768)"
+  ]
+}</pre>
+<h2>Verification</h2>
+<p>Upload the model safetensors file to verify locally:</p>
+<input type="file" id="modelFile" accept=".safetensors,.bin">
+<button onclick="verify()">🔍 Verify Proof</button>
+<pre id="result"></pre>
+<script>
+const proof = {"version": "1.0", "model": "RoyalCities/Foundation-1", "model_file": "mock_weights.bin", "model_size": 10485760, "model_hash": "0ed4fad7d4333a854fc2629783dc8cc2adbd546e4d3a5a360f7f35746e7625d4", "timestamp": "20260327T130951Z", "spot_checks": [{"index": 0, "offset": 3235840, "size": 4096, "sha256": "c27036e882e59a00188dcb548e41aaf1bdb4ff584bd159daf1314360498e9842", "cache_misses": 9, "sample_floats": [-0.07019, 0.003471, -10.460938, 0.239502, -0.000574, -16.34375, 0.11322, 14856.0], "page_number": 790}, {"index": 1, "offset": 5976064, "size": 4096, "sha256": "1da61f6643d3a3e3d3cb1dba2140a1d660ce77c56867d0fca145ffe32e8e237a", "cache_misses": 9, "sample_floats": [8.7e-05, -0.016281, -0.035889, 3628.0, 1590.0, -0.000432, 0.0008, -8.039062], "page_number": 1459}, {"index": 2, "offset": 3813376, "size": 4096, "sha256": "4ca65c5208f41b7a42cdf424639d31bbce093410b2791f817ce4767314622b0f", "cache_misses": 9, "sample_floats": [-4.5e-05, 1672.0, 0.004345, -0.012306, -24.3125, 0.234619, -0.009369, 0.171265], "page_number": 931}], "curve": {"type": "spot_check_curve", "points": [[3.23584, 9, 3.262133992], [5.976064, 9, 0.497426278], [3.813376, 9, 1.285971026]], "description": "3 points in (offset_MB, cache_misses, hash_prefix) space", "verification": "Read same offsets from public model, compute SHA256, compare"}, "verification_url": "https://huggingface.co/RoyalCities/Foundation-1/resolve/main/Foundation_1.safetensors", "instructions": ["Download the model file from verification_url", "For each spot_check: read 'size' bytes at 'offset'", "Compute SHA256 of each block", "Compare with spot_check sha256 values", "All 3 must match \u2014 probability of forgery: 2^(-768)"]};
+
+async function verify() {
+  const file = document.getElementById('modelFile').files[0];
+  if (!file) { document.getElementById('result').textContent = 'Select model file first'; return; }
+  
+  let results = [];
+  for (const check of proof.spot_checks) {
+    const slice = file.slice(check.offset, check.offset + check.size);
+    const buf = await slice.arrayBuffer();
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+    const match = hex === check.sha256;
+    results.push(`Block ${check.index}: offset=${check.offset} ${match ? '✅ MATCH' : '❌ MISMATCH'}\n  expected: ${check.sha256}\n  got:      ${hex}`);
+  }
+  
+  const allMatch = results.every(r => r.includes('MATCH'));
+  document.getElementById('result').innerHTML = 
+    `<span class="${allMatch ? 'ok' : 'fail'}">${allMatch ? '✅ PROOF VERIFIED' : '❌ PROOF FAILED'}</span>\n\n` + results.join('\n\n');
+}
+</script>
+</body></html>

@@ -1,0 +1,38 @@
+[project]
+name        = "foundation-1-demo"
+title       = "Foundation-1 AI Music Generation NFT Series"
+license     = "stabilityai-community"
+description = "AI-generated music samples with stego-embedded provenance"
+
+[model]
+repo        = "RoyalCities/Foundation-1"
+base        = "stabilityai/stable-audio-open-1.0"
+vram        = "7GB"
+format      = "safetensors"
+
+[generation]
+# Prompts for the NFT series — each generates one sample
+prompts = [
+    "Lyre, Warm, Ancient, Melody, Airy, 8 Bars, 72 BPM, E minor",
+    "Flute, Pizzicato, Ambient, Nasal, Melody, Epic, 8 Bars, 100 BPM, A minor",
+    "Synth Pad, Chord Progression, Digital, Wide, Silky, Warm, 8 Bars, 110 BPM, D major",
+    "Bass, FM Bass, Acid, Gritty, Thick, Deep, 303, 8 Bars, 140 BPM, E minor",
+    "Kalimba, Mallet, Sparkly, Bright, Airy, Arp, 4 Bars, 120 BPM, B minor",
+    "Trumpet, Warm, Smooth, Silky, High Reverb, 8 Bars, 130 BPM, C minor",
+    "High Saw, Spacey, Lead, Warm, Pitch Bend, Arp, 8 Bars, 140 BPM, F minor",
+]
+
+[stego]
+# Each generated WAV carries its prompt + model hash + generation params as stego payload
+embed_prompt = true
+embed_model_hash = true
+embed_seed = true
+
+[tiles]
+count   = 71
+pattern = "{:02}.png"
+width   = 512
+height  = 512
+
+[publish]
+huggingface_dataset = "meta-introspector/foundation-1-nft"
