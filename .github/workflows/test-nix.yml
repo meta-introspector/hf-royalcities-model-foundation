@@ -25,9 +25,11 @@ jobs:
 
     - name: Flake Check
       run: nix flake check --impure --no-build
+      working-directory: ${{ github.workspace }}
 
     - name: Build stable-audio-tools
       run: nix build --impure 2>&1 | tail -5
+      working-directory: ${{ github.workspace }}
 
     - name: Test Import
       run: |
@@ -36,6 +38,8 @@ jobs:
         from stable_audio_tools.inference.generation import generate_diffusion_cond
         print('stable-audio-tools OK')
         "
+      working-directory: ${{ github.workspace }}
 
     - name: Test generate.py --help
       run: nix develop --impure --command python3 generate.py --help
+      working-directory: ${{ github.workspace }}

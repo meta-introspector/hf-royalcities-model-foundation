@@ -15,8 +15,9 @@
       py = pkgs.python3Packages;
 
       # Deps not in nixpkgs — built from submodules
-      root = /mnt/data1/time-2026/03-march/27/foundation-1;
-      depSrc = name: builtins.path { path = root + "/deps/${name}"; inherit name; };
+      # --impure required: submodules not in nix store, resolved from working dir
+      pwd = builtins.getEnv "PWD";
+      depSrc = name: builtins.path { path = "${pwd}/deps/${name}"; inherit name; };
 
       alias-free-torch = py.callPackage ./nix/alias-free-torch.nix { src = depSrc "alias-free-torch"; };
       auraloss = py.callPackage ./nix/auraloss.nix { src = depSrc "auraloss"; };
@@ -32,7 +33,7 @@
         pname = "stable-audio-tools";
         version = "0.0.19";
         pyproject = true;
-        src = builtins.path { path = root + "/stable-audio-tools"; name = "stable-audio-tools"; };
+        src = builtins.path { path = "${pwd}/stable-audio-tools"; name = "stable-audio-tools"; };
         build-system = [ py.setuptools ];
         dependencies = [
           alias-free-torch einops-exts ema-pytorch
